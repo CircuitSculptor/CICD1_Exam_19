@@ -2,6 +2,7 @@ package ie.atu.exam.cicd1_exam_19.controller;
 
 import ie.atu.exam.cicd1_exam_19.model.Attendee;
 import ie.atu.exam.cicd1_exam_19.service.EventRegistrationService;
+import jakarta.validation.Valid;
 import jdk.jfr.Event;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +28,8 @@ public class EventController {
     }
 
     @GetMapping("{ticketCode}")
-    public ResponseEntity<List<Attendee>> get(@PathVariable String ticketCode) {
-        Optional<Event> maybe = service.findByTicketCode(ticketCode);
+    public ResponseEntity<List<Attendee>> getTicketCode(@Valid @PathVariable String ticketCode) {
+        Optional<Attendee> maybe = service.findByTicketCode(ticketCode);
         if (maybe.isPresent()) {
             return ResponseEntity.ok((List<Attendee>) maybe.get());
         } else {
