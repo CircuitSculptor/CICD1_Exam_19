@@ -4,7 +4,6 @@ import ie.atu.exam.cicd1_exam_19.controller.errorHandling.AttendeeNotFoundExcept
 import ie.atu.exam.cicd1_exam_19.model.Attendee;
 import ie.atu.exam.cicd1_exam_19.service.EventRegistrationService;
 import jakarta.validation.Valid;
-import jdk.jfr.Event;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +14,8 @@ import java.util.Optional;
 @RequestMapping("/api/event")
 public class EventController {
     private final EventRegistrationService service;
+    private @Valid Attendee aUpdated;
+
     public EventController(EventRegistrationService service) {
         this.service = service;
     }
@@ -26,7 +27,7 @@ public class EventController {
 
     @GetMapping("{ticketCode}")
     public ResponseEntity<List<Attendee>> getTicketCode(@Valid @PathVariable String ticketCode) {
-        Optional<Attendee> maybe = service.findByTicketCode(ticketCode);
+        Optional<Attendee> maybe = service.findByTicketCode(ticketCode, aUpdated);
         if (maybe.isPresent()) {
             return ResponseEntity.ok((List<Attendee>) maybe.get());
         } else {
@@ -42,6 +43,22 @@ public class EventController {
         } else {
             throw new AttendeeNotFoundException(ticketCode);
         }
+    }
+
+    @PutMapping
+    public ResponseEntity<Attendee> update(@Valid @RequestBody Attendee aUpdated) {
+
+    }
+
+    @DeleteMapping("/ticketCode")
+    public ResponseEntity<Attendee> deleteByTicketCode(@Valid @PathVariable String ticketCode) {
+        boolean removedTicket = service.deleteByTicketCode(ticketCode);
+        if (removedTicket) {
+            return ResponseEntity.ok().build();
+        } else {
+            throw new AttendeeNotFoundException(ticketCode);
+        }
+
     }
 
 }

@@ -25,4 +25,7 @@ public class Attendee {
     @Positive
     private int quantity;
 
+    public Object getAttendeeTicketCode() {
+        return ticketCode;
+    }
 }
