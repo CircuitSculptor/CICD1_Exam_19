@@ -1,5 +1,6 @@
 package ie.atu.exam.cicd1_exam_19.controller;
 
+import ie.atu.exam.cicd1_exam_19.controller.errorHandling.AttendeeNotFoundException;
 import ie.atu.exam.cicd1_exam_19.model.Attendee;
 import ie.atu.exam.cicd1_exam_19.service.EventRegistrationService;
 import jakarta.validation.Valid;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/event")
 public class EventController {
