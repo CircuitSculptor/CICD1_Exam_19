@@ -1,6 +1,5 @@
 package ie.atu.exam.cicd1_exam_19.model;
 
-import ie.atu.exam.cicd1_exam_19.service.EventRegistrationService;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventRegistration {
+public class Attendee {
 
     @NotBlank
     private String attendeeName;
